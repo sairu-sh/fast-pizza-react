@@ -1,10 +1,24 @@
+import { useDispatch } from "react-redux";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
+import { addItem } from "../cart/cartSlice";
 
 //eslint-disable-next-line
 function MenuItem({ pizza }) {
+  const dispatch = useDispatch();
   //eslint-disable-next-line
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+
+  function handleAddToCart() {
+    const newItem = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  }
 
   return (
     <li className="flex gap-4 py-2">
@@ -13,9 +27,9 @@ function MenuItem({ pizza }) {
         alt={name}
         className={` h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
       />
-      <div className="flex flex-col grow pt-0.5">
+      <div className="flex grow flex-col pt-0.5">
         <p className="font-medium">{name}</p>
-        <p className="text-sm italic text-stone-500 capitalize">
+        <p className="text-sm capitalize italic text-stone-500">
           {/* eslint-disable-next-line */}
           {ingredients.join(", ")}
         </p>
@@ -23,11 +37,15 @@ function MenuItem({ pizza }) {
           {!soldOut ? (
             <p className="text-sm">{formatCurrency(unitPrice)}</p>
           ) : (
-            <p className="text-sm upperclass font-medium text-stone-500">
+            <p className="upperclass text-sm font-medium text-stone-500">
               Sold out
             </p>
           )}
-          <Button type="small">Add to cart</Button>
+          {!soldOut && (
+            <Button type="small" onClick={handleAddToCart}>
+              Add to cart
+            </Button>
+          )}
         </div>
       </div>
     </li>
