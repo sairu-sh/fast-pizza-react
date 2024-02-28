@@ -1,8 +1,8 @@
-# React + Vite
+This is a react based pizza ordering SPA built using react-router, redux and tailwindcss for styling.
+The menu is fetched from a pre-existing api, user can add pizzas to the cart and can change the quantity of pizzas they want to order.
+Users will fill some information regarding their address and phone number and can place an order.
+Ordering will take them to a new page where they can see the details of their orders.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Used react redux to create a store for global state management.
+Used thunks as middleware for fetching data
+Used various custom hooks such as useDispatch, useSelector, useNavigation, useActionData, useFetcher.
